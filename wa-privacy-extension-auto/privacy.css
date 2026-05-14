@@ -1,0 +1,91 @@
+/* =============================================
+   WhatsApp Privacy Shield — CSS
+   Blurs everything, reveals only active chat
+   ============================================= */
+
+/* ── CHAT LIST (left sidebar) ── */
+
+/* Blur all chat previews in the list */
+body.wa-privacy-on [data-testid="chat-list"] [data-testid="cell-frame-container"],
+body.wa-privacy-on [data-testid="chat-list"] [role="listitem"] {
+  filter: blur(6px);
+  transition: filter 0.2s ease;
+  user-select: none;
+}
+
+/* Un-blur on hover so user can click the right chat */
+body.wa-privacy-on [data-testid="chat-list"] [data-testid="cell-frame-container"]:hover,
+body.wa-privacy-on [data-testid="chat-list"] [role="listitem"]:hover {
+  filter: blur(0px);
+}
+
+/* ── ACTIVE CHAT PANEL (#main) ── */
+
+/* Blur message bubbles in the active chat by default */
+body.wa-privacy-on #main [data-testid="msg-container"],
+body.wa-privacy-on #main [data-testid="conversation-panel-messages"] [role="row"],
+body.wa-privacy-on #main .message-in,
+body.wa-privacy-on #main .message-out,
+body.wa-privacy-on #main [class*="message-"],
+body.wa-privacy-on #main [data-testid*="msg-"] {
+  filter: blur(5px);
+  transition: filter 0.15s ease;
+  user-select: none;
+}
+
+/* Un-blur messages on hover */
+body.wa-privacy-on #main [data-testid="msg-container"]:hover,
+body.wa-privacy-on #main [data-testid="conversation-panel-messages"] [role="row"]:hover,
+body.wa-privacy-on #main .message-in:hover,
+body.wa-privacy-on #main .message-out:hover,
+body.wa-privacy-on #main [class*="message-"]:hover,
+body.wa-privacy-on #main [data-testid*="msg-"]:hover {
+  filter: blur(0px);
+}
+
+/* ── CHAT HEADER (contact name / avatar) ── */
+/* Keep this visible so you know who you're talking to */
+body.wa-privacy-on #main header {
+  filter: none !important;
+}
+
+/* ── INPUT BOX — always visible ── */
+body.wa-privacy-on #main footer,
+body.wa-privacy-on #main [data-testid="conversation-compose-box"] {
+  filter: none !important;
+}
+
+/* ── SEARCH RESULTS ── */
+body.wa-privacy-on [data-testid="search-list"] [role="listitem"],
+body.wa-privacy-on [data-testid="search-list"] [data-testid="cell-frame-container"] {
+  filter: blur(6px);
+  transition: filter 0.2s ease;
+}
+
+body.wa-privacy-on [data-testid="search-list"] [role="listitem"]:hover,
+body.wa-privacy-on [data-testid="search-list"] [data-testid="cell-frame-container"]:hover {
+  filter: blur(0px);
+}
+
+/* ── STATUS / NOTIFICATIONS dot — keep visible ── */
+body.wa-privacy-on [data-testid="icon-unread-count"],
+body.wa-privacy-on [data-testid="unread-count"] {
+  filter: none !important;
+}
+
+/* ── SUBTLE SHIELD INDICATOR ── */
+body.wa-privacy-on::after {
+  content: "🛡️ Privacy Shield ON";
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  background: rgba(18, 140, 126, 0.9);
+  color: white;
+  font-size: 12px;
+  font-family: "Segoe UI", sans-serif;
+  padding: 6px 12px;
+  border-radius: 20px;
+  z-index: 99999;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
